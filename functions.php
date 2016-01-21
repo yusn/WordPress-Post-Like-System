@@ -1,5 +1,5 @@
 <?php
-function brave_scripts_styles() {
+function wp_scripts_styles() {
 	global $wp_styles;
 	if ( !is_admin() ) {
         wp_deregister_script( 'jquery' );
@@ -16,9 +16,8 @@ function brave_scripts_styles() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
 		wp_enqueue_script( 'comment-reply' );
 }  
-// add_action( 'init', 'twentytwelve_scripts_styles' );
 
-add_action( 'init', 'brave_scripts_styles' );
-require( get_template_directory() . '/includes/like.php');
+add_action( 'init', 'wp_scripts_styles' );
+require( get_template_directory() . '/includes/post-like.php');
 
 ?>
