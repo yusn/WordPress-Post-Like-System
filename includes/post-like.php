@@ -1,39 +1,4 @@
 <?php
-
-/*
-Name:  WordPress Post Like System
-Description:  A simple and efficient post like system for WordPress.
-Version:      0.5.2
-Author:       Jon Masterson
-Author URI:   http://jonmasterson.com/
-License:
-Copyright (C) 2015 Jon Masterson
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-/**
- * Register the stylesheets for the public-facing side of the site.
- * @since    0.5
- */
-add_action( 'wp_enqueue_scripts', 'sl_enqueue_scripts' );
-function sl_enqueue_scripts() {
-	wp_enqueue_script( 'simple-likes-public-js', get_template_directory_uri() . '/js/simple-likes-public.js', array( 'jquery' ), '0.5', false );
-	wp_localize_script( 'simple-likes-public-js', 'simpleLikes', array(
-		'ajaxurl' => admin_url( 'admin-ajax.php' ),
-		'like' => __( 'Like', 'YourThemeTextDomain' ),
-		'unlike' => __( 'Unlike', 'YourThemeTextDomain' )
-	) ); 
-}
-
 /**
  * Processes like/unlike
  * @since    0.5
@@ -225,7 +190,7 @@ function get_simple_likes_button( $post_id, $is_comment = NULL ) {
 		$title = __( 'Like', 'YourThemeTextDomain' );
 		$icon = $icon_empty;
 	}
-	$output = '<span class="sl-wrapper"><a href="' . admin_url( 'admin-ajax.php?action=process_simple_like' . '&nonce=' . $nonce . '&post_id=' . $post_id . '&disabled=true&is_comment=' . $is_comment ) . '" class="sl-button' . $post_id_class . $class . $comment_class . '" data-nonce="' . $nonce . '" data-post-id="' . $post_id . '" data-iscomment="' . $is_comment . '" title="' . $title . '">' . $icon . $count . '</a>' . $loader . '</span>';
+	$output = '<span class="m12"><a href="' . admin_url( 'admin-ajax.php?action=process_simple_like' . '&nonce=' . $nonce . '&post_id=' . $post_id . '&disabled=true&is_comment=' . $is_comment ) . '" class="sl-button' . $post_id_class . $class . $comment_class . '" data-nonce="' . $nonce . '" data-post-id="' . $post_id . '" data-iscomment="' . $is_comment . '" title="' . $title . '">' . $icon . $count . '</a>' . $loader . '</span>';
 	return $output;
 } // get_simple_likes_button()
 
@@ -302,7 +267,7 @@ function sl_get_ip() {
  */
 function get_liked_icon() {
 	/* If already using Font Awesome with your theme, replace svg with: <i class="fa fa-heart"></i> */
-	$icon = '<span class="sl-icon"><svg role="img" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0" y="0" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve"><path id="heart-full" d="M124 20.4C111.5-7 73.7-4.8 64 19 54.3-4.9 16.5-7 4 20.4c-14.7 32.3 19.4 63 60 107.1C104.6 83.4 138.7 52.7 124 20.4z"/>&#9829;</svg></span>';
+	$icon = '<span class="sl-icon icon-heart"></span>';
 	return $icon;
 } // get_liked_icon()
 
@@ -312,7 +277,7 @@ function get_liked_icon() {
  */
 function get_unliked_icon() {
 	/* If already using Font Awesome with your theme, replace svg with: <i class="fa fa-heart-o"></i> */
-	$icon = '<span class="sl-icon"><svg role="img" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0" y="0" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve"><path id="heart" d="M64 127.5C17.1 79.9 3.9 62.3 1 44.4c-3.5-22 12.2-43.9 36.7-43.9 10.5 0 20 4.2 26.4 11.2 6.3-7 15.9-11.2 26.4-11.2 24.3 0 40.2 21.8 36.7 43.9C124.2 62 111.9 78.9 64 127.5zM37.6 13.4c-9.9 0-18.2 5.2-22.3 13.8C5 49.5 28.4 72 64 109.2c35.7-37.3 59-59.8 48.6-82 -4.1-8.7-12.4-13.8-22.3-13.8 -15.9 0-22.7 13-26.4 19.2C60.6 26.8 54.4 13.4 37.6 13.4z"/>&#9829;</svg></span>';
+	$icon = '<span class="sl-icon icon-heart-o"></span>';
 	return $icon;
 } // get_unliked_icon()
 
